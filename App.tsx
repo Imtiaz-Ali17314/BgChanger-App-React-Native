@@ -42,7 +42,7 @@ export default function App() {
 
   // Generate random position
   const generateRandomPosition = () => {
-    const shapeSize = 50;
+    const shapeSize = 100;
 
     const x = Math.floor(Math.random() * (SCREEN_WIDTH - shapeSize));
 
@@ -70,8 +70,8 @@ export default function App() {
   const handlePress = () => {
     setRandomBackground(generateRandomColor());
 
-    const numberOfBoxes = Math.floor(Math.random() * 5) + 1;
-    const numberOfCircles = Math.floor(Math.random() * 5) + 1;
+    const numberOfBoxes = Math.floor(Math.random() * 10) + 1;
+    const numberOfCircles = Math.floor(Math.random() * 10) + 1;
 
     const newBoxes = Array.from({ length: numberOfBoxes }, () =>
       generateShape(),
