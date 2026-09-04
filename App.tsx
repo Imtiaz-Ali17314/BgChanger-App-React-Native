@@ -6,22 +6,35 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  const [randomBackground, setRandomBackground] = useState('#ffffff');
+
+  const generateRandomColor = () => {
+    const hexRange = '0123456789ABCDEF';
+    let color = '#';
+
+    for (let i = 0; i < 6; i++) {
+      color += hexRange[Math.floor(Math.random() * 16)];
+    }
+
+    setRandomBackground(color);
+  };
+
   return (
     <>
-      <SafeAreaView>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View style={styles.container}>
-          <TouchableOpacity>
-            <View style={styles.actionBtn}>
-              <Text style={styles.actionBtnText}>Press Me</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <SafeAreaView
+        style={[styles.container, { backgroundColor: randomBackground }]}
+      >
+        <TouchableOpacity onPress={generateRandomColor}>
+          <View style={styles.actionBtn}>
+            <Text style={styles.actionBtnText}>Press Me</Text>
+          </View>
+        </TouchableOpacity>
       </SafeAreaView>
     </>
   );
@@ -29,8 +42,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   actionBtn: {
     backgroundColor: '#6A1B4D',
